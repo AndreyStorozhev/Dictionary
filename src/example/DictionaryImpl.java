@@ -1,3 +1,5 @@
+package example;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +17,7 @@ public class DictionaryImpl implements Dictionary{
 
     private void loadDictionaryFromFile(){
         try {
-            prop.load(new FileInputStream("file.properties"));
+            prop.load(new FileInputStream("files/file.properties"));
         } catch (IOException e) {
             System.out.println("Файл не найден");
         }
@@ -34,7 +36,7 @@ public class DictionaryImpl implements Dictionary{
         map.entrySet().removeIf(next -> next.getKey().equals(key));
         prop.remove(key);
         try {
-            prop.store(new PrintWriter(new FileOutputStream("file.properties"), true), null);
+            prop.store(new PrintWriter(new FileOutputStream("files/file.properties"), true), null);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,7 +54,7 @@ public class DictionaryImpl implements Dictionary{
         if (key.matches("[A-z]{4}")){
             prop.setProperty(key, value);
             try {
-                prop.store(new PrintWriter(new FileOutputStream("file.properties"), true), null);
+                prop.store(new PrintWriter(new FileOutputStream("files/file.properties"), true), null);
             } catch (IOException e) {
                 e.printStackTrace();
             }

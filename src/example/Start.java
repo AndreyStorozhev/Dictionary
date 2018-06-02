@@ -1,12 +1,14 @@
+package example;
+
 import java.util.Scanner;
 
-public class Main {
-    private static Dictionary dictionary;
+public class Start {
+    private Scanner scanner = new Scanner(System.in);
+    private String choice;
+    private Dictionary dictionary;
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String choice;
 
+    public void startProgram(){
         do {
             System.out.println("Выберите словарь с которым хотите работать \n1. Латинский словарь \n2. Цифровой словарь");
             choice = scanner.nextLine();

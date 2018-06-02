@@ -1,3 +1,5 @@
+package example;
+
 public interface Dictionary {
     void viewDictionary();
     void delete(String key);

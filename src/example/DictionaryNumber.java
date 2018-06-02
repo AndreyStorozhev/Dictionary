@@ -1,3 +1,5 @@
+package example;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,7 +20,7 @@ public class DictionaryNumber implements Dictionary {
 
     private void loadDictionaryFromFile(){
         try {
-            prop.load(new FileInputStream("file2.properties"));
+            prop.load(new FileInputStream("files/file2.properties"));
         } catch (IOException e) {
             System.out.println("Файл не найден");
         }
@@ -39,7 +41,7 @@ public class DictionaryNumber implements Dictionary {
         map.entrySet().removeIf(next -> next.getKey().equals(key));
         prop.remove(key);
         try {
-            prop.store(new PrintWriter(new FileOutputStream("file2.properties"), true), null);
+            prop.store(new PrintWriter(new FileOutputStream("files/file2.properties"), true), null);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,7 +61,7 @@ public class DictionaryNumber implements Dictionary {
         if (key.matches("[0-9]{5}")){
             prop.setProperty(key, value);
             try {
-                prop.store(new PrintWriter(new FileOutputStream("file2.properties"), true), null);
+                prop.store(new PrintWriter(new FileOutputStream("files/file2.properties"), true), null);
             } catch (IOException e) {
                 e.printStackTrace();
             }
