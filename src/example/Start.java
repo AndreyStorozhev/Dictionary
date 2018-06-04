@@ -1,16 +1,30 @@
 package example;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class Start {
-    private Scanner scanner = new Scanner(System.in);
+    private Scanner scanner;
     private String choice;
     private Dictionary dictionary;
+    private Properties properties;
+
+    public Start(){
+        scanner = new Scanner(System.in);
+        properties = new Properties();
+        try {
+            properties.load(new FileInputStream("console.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public void startProgram(){
         do {
-            System.out.println("Выберите словарь с которым хотите работать \n1. Латинский словарь \n2. Цифровой словарь");
+            System.out.println(properties.getProperty("choice"));
             choice = scanner.nextLine();
             if (choice.equals("1")) {
                 dictionary = new DictionaryImpl();
@@ -23,8 +37,7 @@ public class Start {
 
 
         do {
-            System.out.println("\nВыберите действие: \n1 - Вывести всё содержимое словаря \n2 - Удалить запись по ключу \n" +
-                    "3 - Найти запись по ключу \n4 - Добавить ключ значние в словарь \nExit - выход из программы");
+            System.out.println(properties.getProperty("menu"));
             choice = scanner.nextLine();
 
             switch (choice) {
@@ -32,21 +45,21 @@ public class Start {
                     dictionary.viewDictionary();
                     break;
                 case "2":
-                    System.out.println("Введите ключ по которому хотите удалить запись");
+                    System.out.println(properties.getProperty("key.remove"));
                     dictionary.delete(scanner.nextLine());
                     break;
                 case "3":
 
-                    System.out.println("Введите ключ для поиска");
+                    System.out.println(properties.getProperty("key.search"));
                     dictionary.findForKey(scanner.nextLine());
                     break;
                 case "4":
-                    System.out.println("Введите ключ - значение для добавления в словарь \n");
+                    System.out.println(properties.getProperty("key.add"));
                     dictionary.addToDictionary(scanner.nextLine(), scanner.nextLine());
                     break;
             }
 
         }while (!choice.equals("Exit"));
-        System.out.println("Программа завершилась");
+        System.out.println(properties.getProperty("exit"));
     }
 }

@@ -8,18 +8,27 @@ import java.util.Properties;
 public class DictionaryImpl implements Dictionary{
     private Map<String, String> map;
     private Properties prop;
+    private Properties propertiesInfo;
 
     public DictionaryImpl() {
         map = new HashMap<>();
         prop = new Properties();
         loadDictionaryFromFile();
+
+
+        propertiesInfo = new Properties();
+        try {
+            propertiesInfo.load(new FileInputStream("console.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadDictionaryFromFile(){
         try {
-            prop.load(new FileInputStream("files/file.properties"));
+            prop.load(new FileInputStream("file.properties"));
         } catch (IOException e) {
-            System.out.println("Файл не найден");
+            System.out.println(propertiesInfo.getProperty("file.not.found"));
         }
 
         for (String key : prop.stringPropertyNames()){
@@ -36,11 +45,11 @@ public class DictionaryImpl implements Dictionary{
         map.entrySet().removeIf(next -> next.getKey().equals(key));
         prop.remove(key);
         try {
-            prop.store(new PrintWriter(new FileOutputStream("files/file.properties"), true), null);
+            prop.store(new PrintWriter(new FileOutputStream("file.properties"), true), null);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Запись удалена");
+        System.out.println(propertiesInfo.getProperty("remove.entry"));
     }
     @Override
     public void findForKey(String key){
@@ -54,14 +63,14 @@ public class DictionaryImpl implements Dictionary{
         if (key.matches("[A-z]{4}")){
             prop.setProperty(key, value);
             try {
-                prop.store(new PrintWriter(new FileOutputStream("files/file.properties"), true), null);
+                prop.store(new PrintWriter(new FileOutputStream("file.properties"), true), null);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             map.put(key, value);
-            System.out.println("Запись успешно добавленна");
+            System.out.println(propertiesInfo.getProperty("successful.entry"));
         }
         else
-            System.out.println("Не удалось добавить запись, длинна ключа может быть только 4 символа и эти символы только буквы латинской раскладки");
+            System.out.println(propertiesInfo.getProperty("error.entry"));
     }
 }
