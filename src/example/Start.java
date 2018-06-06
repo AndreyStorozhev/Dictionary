@@ -10,6 +10,8 @@ public class Start {
     private String choice;
     private Dictionary dictionary;
     private Properties properties;
+    private final String charDictionary = "1";
+    private final String numberDictionary = "2";
 
     public Start(){
         dictionary = new DictionaryImpl();
@@ -27,16 +29,16 @@ public class Start {
         do {
             System.out.println(properties.getProperty("choice"));
             choice = scanner.nextLine();
-            if (choice.equals("1")) {
+            if (choice.equals(charDictionary)) {
                 dictionary.loadDictionaryFromFile("dictionary.char");
                 dictionary.setKeyMath(properties.getProperty("keyMath.char.regexp"), 4);
                 break;
-            }else if (choice.equals("2")) {
+            }else if (choice.equals(numberDictionary)) {
                 dictionary.loadDictionaryFromFile("dictionary.number");
                 dictionary.setKeyMath(properties.getProperty("keyMath.number.regexp"), 5);
                 break;
             }
-        }while (!choice.equals("1") || !choice.equals("2"));
+        }while (!choice.equals(charDictionary) || !choice.equals(numberDictionary));
 
 
         do {
