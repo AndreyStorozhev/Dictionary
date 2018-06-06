@@ -7,32 +7,33 @@ import java.util.Properties;
 
 public class DictionaryImpl implements Dictionary{
     private Map<String, String> map;
-    private Properties prop;
-    private Properties propertiesInfo;
+    private Properties propFile;
+    private Properties propConsole;
+    private String fileName;
+    private String keyMath;
+    private int keyLength;
 
     public DictionaryImpl() {
         map = new HashMap<>();
-        prop = new Properties();
-        loadDictionaryFromFile();
+        propFile = new Properties();
+        propConsole = new Properties();
 
-
-        propertiesInfo = new Properties();
         try {
-            propertiesInfo.load(new FileInputStream("console.properties"));
+            propConsole.load(new FileInputStream("console.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    private void loadDictionaryFromFile(){
+    @Override
+    public void loadDictionaryFromFile(String filename){
+        this.fileName = filename;
         try {
-            prop.load(new FileInputStream("file.properties"));
+            propFile.load(new FileInputStream((propConsole.getProperty(fileName))));
         } catch (IOException e) {
-            System.out.println(propertiesInfo.getProperty("file.not.found"));
+                System.out.println(propConsole.getProperty("file.not.found"));
         }
-
-        for (String key : prop.stringPropertyNames()){
-            map.put(key, prop.getProperty(key));
+        for (String key : propFile.stringPropertyNames()){
+            map.put(key, propFile.getProperty(key));
         }
     }
     @Override
@@ -43,13 +44,13 @@ public class DictionaryImpl implements Dictionary{
     @Override
     public void delete(String key){
         map.entrySet().removeIf(next -> next.getKey().equals(key));
-        prop.remove(key);
+        propFile.remove(key);
         try {
-            prop.store(new PrintWriter(new FileOutputStream("file.properties"), true), null);
+            propFile.store(new PrintWriter(new FileOutputStream(propConsole.getProperty(fileName)), true), null);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(propertiesInfo.getProperty("remove.entry"));
+        System.out.println(propConsole.getProperty("remove.entry"));
     }
     @Override
     public void findForKey(String key){
@@ -60,17 +61,25 @@ public class DictionaryImpl implements Dictionary{
     }
     @Override
     public void addToDictionary(String key, String value){
-        if (key.matches("[A-z]{4}")){
-            prop.setProperty(key, value);
+        if (key.length() != keyLength)
+            System.out.println(propConsole.getProperty(fileName + ".length"));
+        else if (!key.matches(keyMath))
+            System.out.println(propConsole.getProperty(fileName + ".math"));
+        else {
+            propFile.setProperty(key, value);
             try {
-                prop.store(new PrintWriter(new FileOutputStream("file.properties"), true), null);
+                propFile.store(new PrintWriter(new FileOutputStream(propConsole.getProperty(fileName)), true), null);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             map.put(key, value);
-            System.out.println(propertiesInfo.getProperty("successful.entry"));
+            System.out.println(propConsole.getProperty("successful.entry"));
         }
-        else
-            System.out.println(propertiesInfo.getProperty("error.entry"));
+    }
+
+    @Override
+    public void setKeyMath(String keyMath, int keyLength) {
+        this.keyMath = keyMath;
+        this.keyLength = keyLength;
     }
 }

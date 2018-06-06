@@ -12,6 +12,7 @@ public class Start {
     private Properties properties;
 
     public Start(){
+        dictionary = new DictionaryImpl();
         scanner = new Scanner(System.in);
         properties = new Properties();
         try {
@@ -27,10 +28,12 @@ public class Start {
             System.out.println(properties.getProperty("choice"));
             choice = scanner.nextLine();
             if (choice.equals("1")) {
-                dictionary = new DictionaryImpl();
+                dictionary.loadDictionaryFromFile("dictionary.char");
+                dictionary.setKeyMath(properties.getProperty("keyMath.char.regexp"), 4);
                 break;
             }else if (choice.equals("2")) {
-                dictionary = new DictionaryNumber();
+                dictionary.loadDictionaryFromFile("dictionary.number");
+                dictionary.setKeyMath(properties.getProperty("keyMath.number.regexp"), 5);
                 break;
             }
         }while (!choice.equals("1") || !choice.equals("2"));
