@@ -52,6 +52,7 @@ public class Start {
                 case "2":
                     System.out.println(properties.getProperty("key.remove"));
                     dictionary.delete(scanner.nextLine());
+                    System.out.println(properties.getProperty("remove.entry"));
                     break;
                 case "3":
 
@@ -61,6 +62,7 @@ public class Start {
                 case "4":
                     System.out.println(properties.getProperty("key.add"));
                     dictionary.addToDictionary(scanner.nextLine(), scanner.nextLine());
+                    System.out.println(properties.getProperty("successful.entry"));
                     break;
             }
 

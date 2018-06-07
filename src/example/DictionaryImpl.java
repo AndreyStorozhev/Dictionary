@@ -50,7 +50,6 @@ public class DictionaryImpl implements Dictionary{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(propConsole.getProperty("remove.entry"));
     }
     @Override
     public void findForKey(String key){
@@ -73,7 +72,6 @@ public class DictionaryImpl implements Dictionary{
                 e.printStackTrace();
             }
             map.put(key, value);
-            System.out.println(propConsole.getProperty("successful.entry"));
         }
     }
 
