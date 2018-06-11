@@ -10,6 +10,7 @@ public class Start {
     private String choice;
     private Dictionary dictionary;
     private Properties properties;
+    private MyValidator validator;
     private final String charDictionary = "1";
     private final String numberDictionary = "2";
 
@@ -17,6 +18,7 @@ public class Start {
         dictionary = new DictionaryImpl();
         scanner = new Scanner(System.in);
         properties = new Properties();
+        validator = new MyValidator();
         try {
             properties.load(new FileInputStream("console.properties"));
         } catch (IOException e) {
@@ -31,11 +33,11 @@ public class Start {
             choice = scanner.nextLine();
             if (choice.equals(charDictionary)) {
                 dictionary.loadDictionaryFromFile("dictionary.char");
-                dictionary.setKeyMath(properties.getProperty("keyMath.char.regexp"), 4);
+                validator.setKeyMath(properties.getProperty("keyMath.char.regexp"), 4);
                 break;
             }else if (choice.equals(numberDictionary)) {
                 dictionary.loadDictionaryFromFile("dictionary.number");
-                dictionary.setKeyMath(properties.getProperty("keyMath.number.regexp"), 5);
+                validator.setKeyMath(properties.getProperty("keyMath.number.regexp"), 5);
                 break;
             }
         }while (!choice.equals(charDictionary) || !choice.equals(numberDictionary));
@@ -55,14 +57,25 @@ public class Start {
                     System.out.println(properties.getProperty("remove.entry"));
                     break;
                 case "3":
-
                     System.out.println(properties.getProperty("key.search"));
-                    dictionary.findForKey(scanner.nextLine());
+                    String keySearch = scanner.nextLine();
+
+                    if (keySearch.isEmpty())
+                        System.out.println(properties.getProperty("key.search.error"));
+                    else
+                        System.out.println(dictionary.findForKey(keySearch));
+
                     break;
                 case "4":
                     System.out.println(properties.getProperty("key.add"));
-                    dictionary.addToDictionary(scanner.nextLine(), scanner.nextLine());
-                    System.out.println(properties.getProperty("successful.entry"));
+                    String key = scanner.nextLine();
+                    String value = scanner.nextLine();
+
+                    if (validator.validateKey(key)){
+                        dictionary.addToDictionary(key, value);
+                        System.out.println(properties.getProperty("successful.entry"));
+                    }else
+                        properties.getProperty("not.valid.key");
                     break;
             }
 
