@@ -5,6 +5,10 @@ public class MyValidator {
     private int keyLength;
     private FileManager fileManager;
 
+    public MyValidator(FileManager fileManager) {
+        this.fileManager = fileManager;
+    }
+
     public void setKeyMath(String keyMath, int keyLength) {
         this.keyMath = keyMath;
         this.keyLength = keyLength;
