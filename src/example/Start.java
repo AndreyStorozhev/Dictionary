@@ -74,8 +74,10 @@ public class Start {
                     if (validator.validateKey(key)){
                         dictionary.addToDictionary(key, value);
                         System.out.println(properties.getProperty("successful.entry"));
-                    }else
+                    }else {
                         properties.getProperty("not.valid.key");
+                        System.out.println(validator.getError());
+                    }
                     break;
             }
 

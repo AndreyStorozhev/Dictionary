@@ -4,9 +4,10 @@ public class MyValidator {
     private String keyMath;
     private int keyLength;
     private FileManager fileManager;
+    private String error;
 
-    public MyValidator(FileManager fileManager) {
-        this.fileManager = fileManager;
+    public MyValidator() {
+        fileManager = new FileManager();
     }
 
     public void setKeyMath(String keyMath, int keyLength) {
@@ -15,13 +16,17 @@ public class MyValidator {
     }
     public boolean validateKey(String key) {
         if (key.length() != keyLength) {
-            System.out.println(fileManager.getValidMessage(".length"));
+            error = fileManager.getValidMessage(".length");
             return false;
         }
         else if (!key.matches(keyMath)) {
-            System.out.println(fileManager.getValidMessage(".math"));
+            error = fileManager.getValidMessage(".math");
             return false;
         } else
             return true;
+    }
+
+    public String getError() {
+        return error;
     }
 }
