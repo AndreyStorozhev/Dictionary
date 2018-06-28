@@ -3,11 +3,11 @@ package example.dao;
 import example.entity.Key;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Query;
 import java.util.List;
 
 @Repository
@@ -48,6 +48,6 @@ public class KeyDaoImpl implements KeyDao {
     @Transactional
     @SuppressWarnings("unchecked")
     public List<Key> keyList() {
-        return sessionFactory.getCurrentSession().createQuery("from Key").list();
+        return (List<Key>) sessionFactory.getCurrentSession().createQuery("from Key ").list();
     }
 }

@@ -46,7 +46,7 @@ public class SpringConfig {
         prop.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
 
         factoryBean.setHibernateProperties(prop);
-        factoryBean.setPackagesToScan("learn.entity");
+        factoryBean.setPackagesToScan("example.entity");
         return factoryBean;
     }
 
