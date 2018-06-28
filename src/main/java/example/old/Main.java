@@ -1,4 +1,4 @@
-package example;
+package example.old;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

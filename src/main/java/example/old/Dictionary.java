@@ -1,4 +1,4 @@
-package example;
+package example.old;
 
 public interface Dictionary {
     void viewDictionary();
