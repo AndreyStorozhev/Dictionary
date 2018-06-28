@@ -43,4 +43,11 @@ public class ValueDaoImpl implements ValueDao {
         sessionFactory.getCurrentSession().remove(value);
         logger.info("REMOVE VALUE " + value);
     }
+
+    @Override
+    public Value getValueById(int id) {
+        Value value = sessionFactory.getCurrentSession().get(Value.class, id);
+        logger.info("VALUE LOAD " + value);
+        return value;
+    }
 }

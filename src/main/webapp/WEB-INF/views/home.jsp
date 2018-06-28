@@ -20,7 +20,11 @@
                     <tr>
                         <td><a href="/person/${key.id}">${key.id}</a></td>
                         <td>${key.key}</td>
-                        <td>${key.values}</td>
+                        <td>
+                            <c:forEach items="${key.values}" var="value">
+                                ${value.value}
+                            </c:forEach>
+                        </td>
                         <td><a href="/update/${key.id}">Update</a></td>
                     </tr>
                 </c:forEach>

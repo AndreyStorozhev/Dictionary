@@ -50,4 +50,11 @@ public class KeyDaoImpl implements KeyDao {
     public List<Key> keyList() {
         return (List<Key>) sessionFactory.getCurrentSession().createQuery("from Key ").list();
     }
+
+    @Override
+    public Key getKeyById(int id) {
+        Key key = sessionFactory.getCurrentSession().get(Key.class, id);
+        logger.info("KEY LOAD " + key);
+        return key;
+    }
 }

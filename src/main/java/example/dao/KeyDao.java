@@ -9,4 +9,5 @@ public interface KeyDao {
     Key getKeyByName(String key);
     void remove(Key key);
     List<Key> keyList();
+    Key getKeyById(int id);
 }
