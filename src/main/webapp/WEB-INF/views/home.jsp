@@ -18,12 +18,14 @@
             <tbody>
                 <c:forEach items="${listKey}" var="key">
                     <tr>
-                        <td><a href="/person/${key.id}">${key.id}</a></td>
+                        <td>${key.id}</td>
                         <td>${key.key}</td>
                         <td>
-                            <c:forEach items="${key.values}" var="value">
-                                ${value.value}
-                            </c:forEach>
+                            <c:if test="${not empty key.values}">
+                                <c:forEach items="${key.values}" var="value">
+                                    ${value.value}
+                                </c:forEach>
+                            </c:if>
                         </td>
                         <td><a href="/update/${key.id}">Update</a></td>
                     </tr>
