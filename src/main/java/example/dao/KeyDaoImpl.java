@@ -2,6 +2,7 @@ package example.dao;
 
 import example.entity.Key;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,11 @@ public class KeyDaoImpl implements KeyDao {
 
     @Override
     @Transactional
-    public void remove(Key key) {
-        sessionFactory.getCurrentSession().remove(key);
+    public void remove(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Key key = session.load(Key.class, id);
+        if (key != null)
+            session.delete(key);
         logger.info("KEY REMOVE " + key);
     }
 

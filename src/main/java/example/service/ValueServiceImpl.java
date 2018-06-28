@@ -27,7 +27,7 @@ public class ValueServiceImpl implements ValueService {
     }
 
     @Override
-    public void remove(Value value) {
-        valueDao.remove(value);
+    public void remove(int id) {
+        valueDao.remove(id);
     }
 }

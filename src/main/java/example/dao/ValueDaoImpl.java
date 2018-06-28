@@ -1,7 +1,9 @@
 package example.dao;
 
+import example.entity.Key;
 import example.entity.Value;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +41,11 @@ public class ValueDaoImpl implements ValueDao {
 
     @Override
     @Transactional
-    public void remove(Value value) {
-        sessionFactory.getCurrentSession().remove(value);
+    public void remove(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Value value = session.load(Value.class, id);
+        if (value != null)
+            session.delete(value);
         logger.info("REMOVE VALUE " + value);
     }
 

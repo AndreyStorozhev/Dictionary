@@ -27,8 +27,8 @@ public class KeyServiceImpl implements KeyService {
     }
 
     @Override
-    public void remove(Key key) {
-        keyDao.remove(key);
+    public void remove(int id) {
+        keyDao.remove(id);
     }
 
     @Override

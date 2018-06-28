@@ -7,5 +7,5 @@ import java.util.List;
 public interface ValueService {
     Value getByName(String value);
     List<Value> listValue();
-    void remove(Value value);
+    void remove(int id);
 }
