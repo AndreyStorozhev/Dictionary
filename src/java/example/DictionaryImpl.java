@@ -1,15 +1,20 @@
 package example;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Component("dictionary")
 public class DictionaryImpl implements Dictionary {
     private Map<String, String> map;
-    private FileManager fileManager;
+    private final FileManager fileManager;
 
-    public DictionaryImpl() {
+    @Autowired
+    public DictionaryImpl(FileManager fileManager) {
         map = new HashMap<>();
-        fileManager = new FileManager();
+        this.fileManager = fileManager;
     }
     @Override
     public void loadDictionaryFromFile(String filename){

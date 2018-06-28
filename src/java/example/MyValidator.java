@@ -1,15 +1,18 @@
 package example;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component("validator")
 public class MyValidator {
+    private final FileManager fileManager;
     private String keyMath;
     private int keyLength;
-    private FileManager fileManager;
     private String error;
 
-    public MyValidator() {
-        fileManager = new FileManager();
-        System.out.println();
-        System.out.println();
+    @Autowired
+    public MyValidator(FileManager fileManager) {
+        this.fileManager = fileManager;
     }
 
     public void setKeyMath(String keyMath, int keyLength) {
