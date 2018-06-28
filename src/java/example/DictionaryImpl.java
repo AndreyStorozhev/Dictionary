@@ -1,20 +1,20 @@
 package example;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Component("dictionary")
 public class DictionaryImpl implements Dictionary {
-    private Map<String, String> map;
+    private final Map<String, String> map;
     private final FileManager fileManager;
 
     @Autowired
-    public DictionaryImpl(FileManager fileManager) {
-        map = new HashMap<>();
+    public DictionaryImpl(FileManager fileManager, @Qualifier("map") Map<String, String> map) {
         this.fileManager = fileManager;
+        this.map = map;
     }
     @Override
     public void loadDictionaryFromFile(String filename){
