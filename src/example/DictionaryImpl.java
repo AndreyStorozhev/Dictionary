@@ -3,7 +3,7 @@ package example;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DictionaryImpl implements Dictionary{
+public class DictionaryImpl implements Dictionary {
     private Map<String, String> map;
     private FileManager fileManager;
 
