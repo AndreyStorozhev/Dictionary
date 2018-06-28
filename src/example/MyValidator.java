@@ -8,6 +8,7 @@ public class MyValidator {
 
     public MyValidator() {
         fileManager = new FileManager();
+        System.out.println();
     }
 
     public void setKeyMath(String keyMath, int keyLength) {
