@@ -5,16 +5,19 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "KEY_TABLE")
-public class Key {
+@Table(name = "dictionary")
+public class Dictionary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "KEY")
-    private String key;
+    @Column(name = "key_char")
+    private String key_char;
 
-    @OneToMany(mappedBy = "key", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Column(name = "key_num")
+    private String key_num;
+
+    @OneToMany(mappedBy = "dictionary", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Value> values;
 
     public int getId() {
@@ -25,12 +28,20 @@ public class Key {
         this.id = id;
     }
 
-    public String getKey() {
-        return key;
+    public String getKey_num() {
+        return key_num;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setKey_num(String key_num) {
+        this.key_num = key_num;
+    }
+
+    public String getKey_char() {
+        return key_char;
+    }
+
+    public void setKey_char(String key) {
+        this.key_char = key;
     }
 
     public List<Value> getValues() {
@@ -45,8 +56,8 @@ public class Key {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Key key = (Key) o;
-        return id == key.id;
+        Dictionary dictionary = (Dictionary) o;
+        return id == dictionary.id;
     }
 
     @Override

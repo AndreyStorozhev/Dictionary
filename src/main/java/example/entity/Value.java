@@ -13,9 +13,9 @@ public class Value {
     @Column(name = "VALUE")
     private String value;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "KEY_ID")
-    private Key key;
+    @ManyToOne
+    @JoinColumn(name = "dictionary_id")
+    private Dictionary dictionary;
 
     public int getId() {
         return id;
@@ -33,12 +33,12 @@ public class Value {
         this.value = value;
     }
 
-    public Key getKey() {
-        return key;
+    public Dictionary getDictionary() {
+        return dictionary;
     }
 
-    public void setKey(Key key) {
-        this.key = key;
+    public void setDictionary(Dictionary dictionary) {
+        this.dictionary = dictionary;
     }
 
     @Override
@@ -54,3 +54,5 @@ public class Value {
         return Objects.hash(id);
     }
 }
+
+
