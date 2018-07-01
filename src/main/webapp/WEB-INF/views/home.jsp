@@ -17,6 +17,18 @@
     </script>
 </head>
 <body>
+<script type="text/javascript" >
+    function deleteData(str) {
+        $.ajax({
+            type:"GET",
+            url:"/remove/" + str,
+            data:str,
+            success:function () {
+                alert('Удача')
+            }
+        });
+    }
+</script>
     <div id="dictionary_char">Dictionary Char</div>
     <div class="menu_char" style="display:none;">
         <ul>
@@ -28,7 +40,8 @@
                                 ${value.value}
                             </c:forEach>
                         </c:if>
-                        <a name="remove" href="/remove/${charItem.id}">remove</a>
+                        <%--<a name="remove" href="/remove/${charItem.id}">remove</a>--%>
+                        <button onclick="deleteData(${charItem.id})">Delete</button>
                     </li>
                 </c:forEach>
             </c:if>
@@ -51,5 +64,9 @@
             </c:if>
         </ul>
     </div>
+    <form action="${pageContext.request.contextPath}/search" method="get">
+        Search: <input class="text" name="name" type="text">
+        <input type="submit" value="Search">
+    </form>
 </body>
 </html>
