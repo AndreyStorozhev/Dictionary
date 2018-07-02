@@ -2,6 +2,7 @@ package example.service;
 
 import example.dao.KeyDao;
 import example.entity.Key;
+import example.entity.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +18,22 @@ public class DictionaryServiceImpl implements DictionaryService {
     }
 
     @Override
-    public void saveOrUpdateKeyChar(Key key) {
+    public void saveOrUpdateKeyChar(Key key, String value) {
+        Value val = new Value();
+        val.setValue(value);
+
         key.setFlag(0);
+        key.getValues().add(val);
         keyDao.saveOrUpdateKey(key);
     }
 
     @Override
-    public void saveOrUpdateKeyNum(Key key) {
+    public void saveOrUpdateKeyNum(Key key, String value) {
+        Value val = new Value();
+        val.setValue(value);
+
         key.setFlag(1);
+        key.getValues().add(val);
         keyDao.saveOrUpdateKey(key);
     }
 

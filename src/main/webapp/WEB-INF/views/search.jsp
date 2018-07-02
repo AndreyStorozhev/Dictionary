@@ -5,17 +5,10 @@
     <title>search</title>
 </head>
 <body>
-    <c:if test="${not empty key.key_char}">
-        <p>${key.key_char} -
-            <c:forEach items="${key.values}" var="itemChar">
-                ${itemChar.value}
-            </c:forEach>
-        </p>
-    </c:if>
-    <c:if test="${not empty key.key_char}">
-        <p>${key.key_num} -
-            <c:forEach items="${key.values}" var="itemNum">
-                ${itemNum.value}
+    <c:if test="${not empty key}">
+        <p>${key.key} -
+            <c:forEach items="${key.values}" var="item">
+                ${item.value}
             </c:forEach>
         </p>
     </c:if>
