@@ -14,8 +14,16 @@ public class Value {
     private String value;
 
     @ManyToOne
-    @JoinColumn(name = "dictionary_id")
-    private Dictionary dictionary;
+    @JoinColumn(name = "KEY_ID")
+    private Key key;
+
+    public Key getKey() {
+        return key;
+    }
+
+    public void setKey(Key key) {
+        this.key = key;
+    }
 
     public int getId() {
         return id;
@@ -33,13 +41,6 @@ public class Value {
         this.value = value;
     }
 
-    public Dictionary getDictionary() {
-        return dictionary;
-    }
-
-    public void setDictionary(Dictionary dictionary) {
-        this.dictionary = dictionary;
-    }
 
     @Override
     public boolean equals(Object o) {

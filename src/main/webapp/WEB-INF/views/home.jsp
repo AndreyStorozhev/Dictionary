@@ -23,8 +23,8 @@
             type:"GET",
             url:"/remove/" + str,
             data:str,
-            success:function () {
-                alert('Удача')
+            success:function (result) {
+                $('#result').html(result);
             }
         });
     }
@@ -34,7 +34,7 @@
         <ul>
             <c:if test="${not empty listKeyChar}">
                 <c:forEach items="${listKeyChar}" var="charItem">
-                    <li>${charItem.key_char} -
+                    <li>${charItem.key} -
                         <c:if test="${not empty charItem.values}" >
                             <c:forEach items="${charItem.values}" var="value">
                                 ${value.value}
@@ -52,7 +52,7 @@
         <ul>
             <c:if test="${not empty listKeyNum}">
                 <c:forEach items="${listKeyNum}" var="numItem">
-                    <li>${numItem.key_num} -
+                    <li>${numItem.key} -
                         <c:if test="${not empty numItem.values}">
                             <c:forEach items="${numItem.values}" var="value">
                                 ${value.value}
@@ -68,5 +68,6 @@
         Search: <input class="text" name="name" type="text">
         <input type="submit" value="Search">
     </form>
+<span id="result"></span>
 </body>
 </html>

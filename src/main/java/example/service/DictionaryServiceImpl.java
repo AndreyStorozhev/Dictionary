@@ -1,7 +1,7 @@
 package example.service;
 
-import example.dao.DictionaryDao;
-import example.entity.Dictionary;
+import example.dao.KeyDao;
+import example.entity.Key;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,35 +9,42 @@ import java.util.List;
 
 @Service
 public class DictionaryServiceImpl implements DictionaryService {
-    private final DictionaryDao dictionaryDao;
+    private final KeyDao keyDao;
 
     @Autowired
-    public DictionaryServiceImpl(DictionaryDao dictionaryDao) {
-        this.dictionaryDao = dictionaryDao;
+    public DictionaryServiceImpl(KeyDao dictionaryDao) {
+        this.keyDao = dictionaryDao;
     }
 
     @Override
-    public void saveOrUpdateKey(Dictionary dictionary) {
-        dictionaryDao.saveOrUpdateKey(dictionary);
+    public void saveOrUpdateKeyChar(Key key) {
+        key.setFlag(0);
+        keyDao.saveOrUpdateKey(key);
     }
 
     @Override
-    public Dictionary getKeyByName(String key) {
-        return dictionaryDao.getKeyByName(key);
+    public void saveOrUpdateKeyNum(Key key) {
+        key.setFlag(1);
+        keyDao.saveOrUpdateKey(key);
+    }
+
+    @Override
+    public Key getKeyByName(String key) {
+        return keyDao.getKeyByName(key);
     }
 
     @Override
     public void remove(int id) {
-        dictionaryDao.remove(id);
+        keyDao.remove(id);
     }
 
     @Override
-    public List<Dictionary> keyListChar() {
-        return dictionaryDao.keyListChar();
+    public List<Key> keyListChar() {
+        return keyDao.keyListChar();
     }
 
     @Override
-    public List<Dictionary> keyListNumber() {
-        return dictionaryDao.keyListNumber();
+    public List<Key> keyListNumber() {
+        return keyDao.keyListNumber();
     }
 }

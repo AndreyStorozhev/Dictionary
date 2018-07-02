@@ -22,10 +22,9 @@ public class MyController {
         return "home";
     }
     @GetMapping("/remove/{id}")
-    public @ResponseBody
-    String remove(@PathVariable("id") int id) {
+    public String remove(@PathVariable("id") int id) {
         dictionaryService.remove(id);
-        return "";
+        return "home";
     }
     @RequestMapping("/search")
     public String search(@RequestParam("name") String name, Model model) {

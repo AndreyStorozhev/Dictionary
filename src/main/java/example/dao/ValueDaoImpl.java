@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ValueDaoImpl implements ValueDao {
     private final SessionFactory sessionFactory;
-    private static final Logger logger = Logger.getLogger(DictionaryDaoImpl.class);
+    private static final Logger logger = Logger.getLogger(KeyDaoImpl.class);
 
     @Autowired
     public ValueDaoImpl(SessionFactory sessionFactory) {
