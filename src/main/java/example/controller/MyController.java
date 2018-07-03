@@ -51,7 +51,6 @@ public class MyController {
     public String add(@ModelAttribute("addKeyChar") KeyDictionary keyDictionary, @RequestParam("value") String value,
                       BindingResult bindingResult, Model model, SessionStatus status) {
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!! " + keyDictionary.getFlag());
-//        keyDictionary.setFlag(flag);
         validator.validate(keyDictionary, bindingResult);
         if (bindingResult.hasErrors()) {
             model.addAttribute("addKeyChar", keyDictionary);
