@@ -1,6 +1,7 @@
 package example.service;
 
 import example.dao.KeyDao;
+import example.dao.ValueDao;
 import example.entity.KeyDictionary;
 import example.entity.Value;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,12 @@ import java.util.List;
 @Service
 public class DictionaryServiceImpl implements DictionaryService {
     private final KeyDao keyDao;
+    private final ValueDao valueDao;
 
     @Autowired
-    public DictionaryServiceImpl(KeyDao keyDao) {
+    public DictionaryServiceImpl(KeyDao keyDao, ValueDao valueDao) {
         this.keyDao = keyDao;
+        this.valueDao = valueDao;
     }
 
     @Override
@@ -62,5 +65,10 @@ public class DictionaryServiceImpl implements DictionaryService {
     @Override
     public List<KeyDictionary> keyListNumber() {
         return keyDao.keyListNumber();
+    }
+
+    @Override
+    public void removeValue(int id) {
+        valueDao.remove(id);
     }
 }

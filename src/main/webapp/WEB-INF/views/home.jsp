@@ -36,7 +36,7 @@
         <ul>
             <c:if test="${not empty listKeyChar}">
                 <c:forEach items="${listKeyChar}" var="charItem">
-                    <li>${charItem.key} -
+                    <li><a href="<c:url value="/update/${charItem.key}"/>">${charItem.key}</a> -
                         <c:if test="${not empty charItem.values}" >
                             <c:forEach items="${charItem.values}" var="value">
                                 ${value.value}
@@ -55,7 +55,7 @@
         <ul>
             <c:if test="${not empty listKeyNum}">
                 <c:forEach items="${listKeyNum}" var="numItem">
-                    <li>${numItem.key} -
+                    <li><a href="<c:url value="/update/${numItem.key}"/>">${numItem.key}</a> -
                         <c:if test="${not empty numItem.values}">
                             <c:forEach items="${numItem.values}" var="value">
                                 ${value.value}

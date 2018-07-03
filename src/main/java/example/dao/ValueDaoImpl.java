@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class ValueDaoImpl implements ValueDao {
@@ -19,6 +20,7 @@ public class ValueDaoImpl implements ValueDao {
     }
 
     @Override
+    @Transactional
     public void remove(int id) {
         Session session = sessionFactory.getCurrentSession();
         Value value = session.get(Value.class, id);
@@ -28,6 +30,7 @@ public class ValueDaoImpl implements ValueDao {
     }
 
     @Override
+    @Transactional
     public Value getByName(String name) {
         Query query = sessionFactory.getCurrentSession().createQuery("from Value where value = :name");
         query.setParameter("name", name);
@@ -38,6 +41,7 @@ public class ValueDaoImpl implements ValueDao {
     }
 
     @Override
+    @Transactional
     public void saveOrUpdateValue(Value value) {
         sessionFactory.getCurrentSession().saveOrUpdate(value);
     }

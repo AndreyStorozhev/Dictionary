@@ -7,7 +7,7 @@
 </head>
 <body>
     <p><spring:message code="dictionary.add"/> </p>
-    <form:form method="post" modelAttribute="addKeyChar">
+    <form:form method="post" modelAttribute="addKey">
         <form:label path="key" cssClass="label">
             Key
         </form:label>

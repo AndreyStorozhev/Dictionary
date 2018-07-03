@@ -9,6 +9,7 @@
         <p>${key.key} -
             <c:forEach items="${key.values}" var="item">
                 ${item.value}
+                <a href="<c:url value="/search/removeValue/${item.id}"/>">del</a>
             </c:forEach>
         </p>
     </c:if>

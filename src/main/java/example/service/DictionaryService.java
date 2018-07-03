@@ -11,4 +11,5 @@ public interface DictionaryService {
     void remove(int id);
     List<KeyDictionary> keyListChar();
     List<KeyDictionary> keyListNumber();
+    void removeValue(int id);
 }
