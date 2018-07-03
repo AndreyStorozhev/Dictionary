@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = {"example.dao", "example.service"})
+@ComponentScan(basePackages = {"example.dao", "example.service", "example.validator"})
 @EnableTransactionManagement
 @PropertySource("classpath:db.properties")
 public class SpringConfig {

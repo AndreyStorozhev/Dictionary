@@ -45,6 +45,8 @@
                         <button onclick="deleteData(${charItem.id})">Delete</button>
                     </li>
                 </c:forEach>
+                <p></p>
+                <a href="<c:url value="/add/0"/>">Add dictionary</a>
             </c:if>
         </ul>
     </div>
@@ -62,6 +64,8 @@
                         <a href="/remove/${numItem.id}">remove</a>
                     </li>
                 </c:forEach>
+                <p></p>
+                <a href="<c:url value="/add/1"/>">Add dictionary</a>
             </c:if>
         </ul>
     </div>
@@ -69,6 +73,5 @@
         Search: <input class="text" name="name" type="text">
         <input type="submit" value="Search">
     </form>
-    <a href="<c:url value="/add"/>">Add char dictionary</a>
 </body>
 </html>
