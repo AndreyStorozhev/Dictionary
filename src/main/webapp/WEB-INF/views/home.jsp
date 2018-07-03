@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -23,8 +24,9 @@
             type:"GET",
             url:"/remove/" + str,
             data:str,
-            success:function (result) {
-                $('#result').html(result);
+            dataType:"json",
+            success:function (data) {
+                console.log(data);
             }
         });
     }
@@ -40,7 +42,6 @@
                                 ${value.value}
                             </c:forEach>
                         </c:if>
-                        <%--<a name="remove" href="/remove/${charItem.id}">remove</a>--%>
                         <button onclick="deleteData(${charItem.id})">Delete</button>
                     </li>
                 </c:forEach>
@@ -68,6 +69,6 @@
         Search: <input class="text" name="name" type="text">
         <input type="submit" value="Search">
     </form>
-<span id="result"></span>
+    <a href="<c:url value="/add"/>">Add char dictionary</a>
 </body>
 </html>

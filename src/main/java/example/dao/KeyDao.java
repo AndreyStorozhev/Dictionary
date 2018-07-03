@@ -1,13 +1,13 @@
 package example.dao;
 
-import example.entity.Key;
+import example.entity.KeyDictionary;
 
 import java.util.List;
 
 public interface KeyDao {
-    void saveOrUpdateKey(Key Key);
-    Key getKeyByName(String key);
+    void saveOrUpdateKey(KeyDictionary key);
+    KeyDictionary getKeyByName(String key);
     void remove(int id);
-    List<Key> keyListChar();
-    List<Key> keyListNumber();
+    List<KeyDictionary> keyListChar();
+    List<KeyDictionary> keyListNumber();
 }

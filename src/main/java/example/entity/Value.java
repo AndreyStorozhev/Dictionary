@@ -15,14 +15,14 @@ public class Value {
 
     @ManyToOne
     @JoinColumn(name = "KEY_ID")
-    private Key key;
+    private KeyDictionary key;
 
-    public Key getKey() {
+    public KeyDictionary getKey() {
         return key;
     }
 
-    public void setKey(Key key) {
-        this.key = key;
+    public void setKey(KeyDictionary keyDictionary) {
+        this.key = keyDictionary;
     }
 
     public int getId() {

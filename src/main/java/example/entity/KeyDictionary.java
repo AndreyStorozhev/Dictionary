@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "KEY_TABLE")
-public class Key {
+public class KeyDictionary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -14,10 +14,10 @@ public class Key {
     @Column(name = "FLAG")
     private int flag;
 
-    @Column(name = "KEY")
+    @Column(name = "key_dictionary")
     private String key;
 
-    @OneToMany(mappedBy = "key", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "key", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Value> values;
 
     public List<Value> getValues() {
@@ -56,8 +56,8 @@ public class Key {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Key key = (Key) o;
-        return id == key.id;
+        KeyDictionary keyDictionary = (KeyDictionary) o;
+        return id == keyDictionary.id;
     }
 
     @Override

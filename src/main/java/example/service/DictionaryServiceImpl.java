@@ -1,11 +1,12 @@
 package example.service;
 
 import example.dao.KeyDao;
-import example.entity.Key;
+import example.entity.KeyDictionary;
 import example.entity.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,32 +14,38 @@ public class DictionaryServiceImpl implements DictionaryService {
     private final KeyDao keyDao;
 
     @Autowired
-    public DictionaryServiceImpl(KeyDao dictionaryDao) {
-        this.keyDao = dictionaryDao;
+    public DictionaryServiceImpl(KeyDao keyDao) {
+        this.keyDao = keyDao;
     }
 
     @Override
-    public void saveOrUpdateKeyChar(Key key, String value) {
+    public void saveOrUpdateKeyChar(KeyDictionary key, String value) {
         Value val = new Value();
         val.setValue(value);
+        val.setKey(key);
+        List<Value> list = new ArrayList<>();
+        list.add(val);
 
         key.setFlag(0);
-        key.getValues().add(val);
+        key.setValues(list);
         keyDao.saveOrUpdateKey(key);
     }
 
     @Override
-    public void saveOrUpdateKeyNum(Key key, String value) {
+    public void saveOrUpdateKeyNum(KeyDictionary key, String value) {
         Value val = new Value();
         val.setValue(value);
+        val.setKey(key);
+        List<Value> list = new ArrayList<>();
+        list.add(val);
 
         key.setFlag(1);
-        key.getValues().add(val);
+        key.setValues(list);
         keyDao.saveOrUpdateKey(key);
     }
 
     @Override
-    public Key getKeyByName(String key) {
+    public KeyDictionary getKeyByName(String key) {
         return keyDao.getKeyByName(key);
     }
 
@@ -48,12 +55,12 @@ public class DictionaryServiceImpl implements DictionaryService {
     }
 
     @Override
-    public List<Key> keyListChar() {
+    public List<KeyDictionary> keyListChar() {
         return keyDao.keyListChar();
     }
 
     @Override
-    public List<Key> keyListNumber() {
+    public List<KeyDictionary> keyListNumber() {
         return keyDao.keyListNumber();
     }
 }

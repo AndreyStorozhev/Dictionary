@@ -1,6 +1,6 @@
 package example.dao;
 
-import example.entity.Key;
+import example.entity.KeyDictionary;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,42 +23,53 @@ public class KeyDaoImpl implements KeyDao {
 
     @Override
     @Transactional
-    public void saveOrUpdateKey(Key Key) {
-        sessionFactory.getCurrentSession().saveOrUpdate(Key);
-        logger.info("KEY SAVE " + Key);
+    public void saveOrUpdateKey(KeyDictionary key) {
+        sessionFactory.getCurrentSession().saveOrUpdate(key);
+        logger.info("KEY SAVE " + key);
     }
 
     @Override
     @Transactional
-    public Key getKeyByName(String key) {
-        Query query = sessionFactory.getCurrentSession().createQuery("from Key where key = :key");
+    public KeyDictionary getKeyByName(String key) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from KeyDictionary where key = :key");
         query.setParameter("key", key);
-        Key getKey = (Key) query.getSingleResult();
-        logger.info("KEY GET " + getKey);
-        return getKey;
+        KeyDictionary getKeyDictionary = (KeyDictionary) query.getSingleResult();
+        session.getTransaction().commit();
+        logger.info("KEY GET " + getKeyDictionary);
+        return getKeyDictionary;
     }
 
     @Override
     @Transactional
     public void remove(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Key key = session.get(Key.class, id);
-        if (key != null)
-            session.delete(key);
-        logger.info("KEY REMOVE " + key);
+        KeyDictionary keyDictionary = session.get(KeyDictionary.class, id);
+        if (keyDictionary != null)
+            session.delete(keyDictionary);
+        logger.info("KEY REMOVE " + keyDictionary);
     }
 
     @Override
     @Transactional
     @SuppressWarnings("unchecked")
-    public List<Key> keyListChar() {
-        return (List<Key>) sessionFactory.getCurrentSession().createQuery("from Key where flag = 0").list();
+    public List<KeyDictionary> keyListChar() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<KeyDictionary> list = session.createQuery("from KeyDictionary where flag = 0").list();
+        session.getTransaction().commit();
+        return list;
     }
 
     @Override
     @Transactional
     @SuppressWarnings("unchecked")
-    public List<Key> keyListNumber() {
-        return (List<Key>) sessionFactory.getCurrentSession().createQuery("from Key where flag = 1").list();
+    public List<KeyDictionary> keyListNumber() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<KeyDictionary> list = session.createQuery("from KeyDictionary where flag = 1").list();
+        session.getTransaction().commit();
+        return list;
     }
 }
