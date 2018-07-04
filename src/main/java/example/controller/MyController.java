@@ -72,7 +72,6 @@ public class MyController {
     @GetMapping("/update/{name}")
     public String update(@PathVariable("name") String name, Model model) {
         KeyDictionary keyByName = dictionaryService.getKeyByName(name);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + keyByName.getFlag());
         model.addAttribute("updateKey", keyByName);
         return "update";
     }
